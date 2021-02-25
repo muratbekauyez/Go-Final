@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/muratbekauyez/prime/primepb"
+	"github.com/muratbekauyez/go-final/primenumber/primepb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

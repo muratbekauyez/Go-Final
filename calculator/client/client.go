@@ -1,11 +1,11 @@
 package client
 
 import (
+	calculator "../pb"
 	"context"
 	"fmt"
-	"log"
 	"google.golang.org/grpc"
-	computeAverage "../pb"
+	"log"
 	//"io"
 	"time"
 )
@@ -19,22 +19,21 @@ func main() {
 
 	defer cc.Close()
 
-	c:= computeAverage.NewComputeAverageServiceClient(cc)
+	c := computeAverage.NewComputeAverageServiceClient(cc)
 	//doUnary(c)
-	arr := []int32{1,2,3,4}
-	GetAverageOfArr(arr,c)
-
+	arr := []int32{1, 2, 3, 4}
+	GetAverageOfArr(arr, c)
 
 }
 
-func GetAverageOfArr(arr []int32, c computeAverage.ComputeAverageServiceClient ) {
+func GetAverageOfArr(arr []int32, c computeAverage.ComputeAverageServiceClient) {
 	stream, err := c.ComputeAvg(context.Background())
 	if err != nil {
 		log.Fatalf("error while calling LongGreet RPC: %v", err)
 	}
 	for _, val := range arr {
-		req := &computeAverage.ComputeAverageRequest {
-			Val : val,
+		req := &computeAverage.ComputeAverageRequest{
+			Val: val,
 		}
 		fmt.Println("Sending req %v", req)
 		stream.Send(req)
@@ -45,5 +44,5 @@ func GetAverageOfArr(arr []int32, c computeAverage.ComputeAverageServiceClient )
 	if err != nil {
 		log.Fatalf("error while recieving response from computeAvg &v", err)
 	}
-	fmt.Printf("computeAvg Response: %v\n",res)
+	fmt.Printf("computeAvg Response: %v\n", res)
 }

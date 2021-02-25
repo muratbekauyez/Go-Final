@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 	"fmt"
-	computeAverage "../pb"
+	calculator "../averagepb"
 	"google.golang.org/grpc"
 	//"time"
 	"io"
